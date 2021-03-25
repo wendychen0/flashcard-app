@@ -136,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
                 flashcardDatabase.deleteCard(((TextView) findViewById(R.id.flashcard_question)).getText().toString());
                 currentCardDisplayedIndex += 1;
                 allFlashcards = flashcardDatabase.getAllCards();
+                Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
+                ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getQuestion());
+                ((TextView) findViewById(R.id.flashcard_answer)).setText(flashcard.getAnswer());
                 if (allFlashcards.size() == 1)
                     ((TextView) findViewById(R.id.flashcard_question)).setText("Add a card!");
 
