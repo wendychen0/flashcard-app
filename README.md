@@ -3,7 +3,7 @@
 ## Lab 3
 
 ### App Description
-Flashcard app that can now save and store previous and new cards in a database, has the option to delete cards as well (but with a slight bug)
+Flashcard app that can now save and store previous and new cards in a database, has the option to delete cards as well
 
 ### App Walk-though
 
