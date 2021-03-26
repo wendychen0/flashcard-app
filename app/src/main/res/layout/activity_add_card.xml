@@ -30,6 +30,24 @@
         android:layout_below="@id/questionTextField"
         android:layout_height="70dp"
         android:layout_margin="20dp"
+        android:hint="Enter the correct answer here"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/answerTextField2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/answerTextField"
+        android:layout_margin="20dp"
+        android:hint="Enter the answer here"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/answerTextField3"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/answerTextField2"
+        android:layout_margin="20dp"
         android:hint="Enter the answer here"
         android:inputType="textMultiLine" />
 

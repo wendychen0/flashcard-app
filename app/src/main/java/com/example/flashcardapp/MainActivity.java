@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         flashcardAnswer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flashcardAnswer1.setBackgroundColor(getResources().getColor(R.color.nice_red, null));
+                flashcardAnswer1.setBackgroundColor(getResources().getColor(R.color.green, null));
             }
         });
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         flashcardAnswer3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                flashcardAnswer3.setBackgroundColor(getResources().getColor(R.color.green, null));
+                flashcardAnswer3.setBackgroundColor(getResources().getColor(R.color.nice_red, null));
             }
         });
 
@@ -117,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 if (allFlashcards.size() == 0)
                     return;
                 currentCardDisplayedIndex += 1;
+                flashcardAnswer1.setBackgroundColor(getResources().getColor(R.color.yellow, null));
+                flashcardAnswer2.setBackgroundColor(getResources().getColor(R.color.yellow, null));
+                flashcardAnswer3.setBackgroundColor(getResources().getColor(R.color.yellow, null));
                 if(currentCardDisplayedIndex >= allFlashcards.size()) {
                     Snackbar.make(flashcardQuestion,
                             "You've reached the end of the cards, going back to start.",
@@ -128,19 +131,32 @@ public class MainActivity extends AppCompatActivity {
 
                 ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getQuestion());
                 ((TextView) findViewById(R.id.flashcard_answer)).setText(flashcard.getAnswer());
+                ((TextView) findViewById(R.id.flashcard_answer1)).setText(flashcard.getAnswer());
+                ((TextView) findViewById(R.id.flashcard_answer2)).setText(flashcard.getWrongAnswer1());
+                ((TextView) findViewById(R.id.flashcard_answer3)).setText(flashcard.getWrongAnswer2());
             }
         });
         findViewById(R.id.trashButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 flashcardDatabase.deleteCard(((TextView) findViewById(R.id.flashcard_question)).getText().toString());
-                currentCardDisplayedIndex += 1;
+
                 allFlashcards = flashcardDatabase.getAllCards();
-                Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
-                ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getQuestion());
-                ((TextView) findViewById(R.id.flashcard_answer)).setText(flashcard.getAnswer());
-                if (allFlashcards.size() == 1)
+                // if we delete the only card, display nothing
+                if (allFlashcards.size() == 0) {
                     ((TextView) findViewById(R.id.flashcard_question)).setText("Add a card!");
+                    // If we delete the last card, display the first card
+                } else if (currentCardDisplayedIndex >= allFlashcards.size()) {
+                    currentCardDisplayedIndex = 0;
+                } else {
+                    Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
+                    ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getQuestion());
+                    ((TextView) findViewById(R.id.flashcard_answer)).setText(flashcard.getAnswer());
+                    ((TextView) findViewById(R.id.flashcard_answer1)).setText(flashcard.getAnswer());
+                    ((TextView) findViewById(R.id.flashcard_answer2)).setText(flashcard.getWrongAnswer1());
+                    ((TextView) findViewById(R.id.flashcard_answer3)).setText(flashcard.getWrongAnswer2());
+                }
+
 
             }
         });
@@ -149,13 +165,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK) { // this 100 needs to match the 100 we used when we called startActivityForResult!
-            String string1 = data.getExtras().getString("string1"); // 'string1' needs to match the key we used when we put the string in the Intent
+            String question = data.getExtras().getString("question"); // 'string1' needs to match the key we used when we put the string in the Intent
             String string2 = data.getExtras().getString("string2");
-            ((TextView)findViewById(R.id.flashcard_question)).setText(string1);
+            String string3 = data.getExtras().getString("string3");
+            String string4 = data.getExtras().getString("string4");
+            ((TextView)findViewById(R.id.flashcard_question)).setText(question);
 
             ((TextView)findViewById(R.id.flashcard_answer)).setText(string2);
+            ((TextView)findViewById(R.id.flashcard_answer2)).setText(string3);
+            ((TextView)findViewById(R.id.flashcard_answer3)).setText(string4);
 
-            flashcardDatabase.insertCard(new Flashcard(string1, string2));
+            flashcardDatabase.insertCard(new Flashcard(question, string2, string3, string4));
             allFlashcards = flashcardDatabase.getAllCards();
         }
     }

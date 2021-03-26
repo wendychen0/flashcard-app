@@ -14,66 +14,68 @@
         android:id="@+id/flashcard_question"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="7dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="7dp"
         android:background="@drawable/card_background"
         android:elevation="8dp"
         android:gravity="center"
-        android:text="Who was the 44th President of the United States?"
-        android:textSize="40sp" />
+        android:text="Add a Card"
+        android:textSize="40sp"
+        tools:text="Who was the 44th President of the United States?" />
 
     <TextView
         android:id="@+id/flashcard_answer"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:text="Barack Obama"
-        android:gravity="center"
-        android:visibility="invisible"
         android:background="#F2E98C"
-        android:textSize="40sp"/>
+        android:gravity="center"
+        android:text="Add a Card"
+        android:textSize="40sp"
+        android:visibility="invisible"
+        tools:text="Barack Obama" />
 
     <TextView
         android:id="@+id/flashcard_answer1"
         android:layout_width="match_parent"
-        android:layout_below="@+id/flashcard_question"
         android:layout_height="100dp"
-        android:layout_marginTop="25dp"
-        android:text="Bill Clinton"
+        android:layout_below="@+id/flashcard_question"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="70dp"
         android:layout_marginRight="15dp"
-        android:gravity="center"
-        android:visibility="invisible"
         android:background="#ffeead"
-        android:textSize="40sp"/>
+        android:gravity="center"
+        android:textSize="40sp"
+        android:visibility="invisible"
+        tools:text="Bill Clinton" />
 
     <TextView
         android:id="@+id/flashcard_answer2"
         android:layout_width="match_parent"
-        android:layout_below="@+id/flashcard_answer1"
         android:layout_height="100dp"
-        android:layout_marginTop="25dp"
-        android:text="George H. W. Bush"
-        android:gravity="center"
+        android:layout_below="@+id/flashcard_answer1"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="15dp"
-        android:visibility="invisible"
         android:background="#ffeead"
-        android:textSize="40sp"/>
+        android:gravity="center"
+        android:textSize="40sp"
+        android:visibility="invisible"
+        tools:text="George H. W. Bush" />
 
     <TextView
         android:id="@+id/flashcard_answer3"
         android:layout_width="match_parent"
-        android:layout_below="@+id/flashcard_answer2"
         android:layout_height="100dp"
-        android:layout_marginTop="25dp"
-        android:text="Barack Obama"
+        android:layout_below="@+id/flashcard_answer2"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="15dp"
-        android:gravity="center"
-        android:visibility="invisible"
         android:background="#ffeead"
-        android:textSize="40sp"/>
+        android:gravity="center"
+        android:textSize="40sp"
+        android:visibility="invisible"
+        tools:text="Barack Obama" />
 
     <ImageView
         android:layout_width="40dp"

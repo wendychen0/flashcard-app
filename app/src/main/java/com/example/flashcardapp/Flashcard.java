@@ -72,6 +72,11 @@ public class Flashcard {
         return answer;
     }
 
+//    @NonNull
+//    public String getAnswer2() {
+//        return wrongAnswer1;
+//    }
+
     public void setAnswer(@NonNull String answer) {
         this.answer = answer;
     }
