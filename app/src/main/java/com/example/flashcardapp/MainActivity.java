@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.plattysoft.leonids.ParticleSystem;
 
 import java.util.List;
 
@@ -50,35 +51,79 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 flashcardQuestion.setVisibility(View.INVISIBLE);
-                flashcardAnswer.setVisibility(View.VISIBLE);
+                //flashcardAnswer.setVisibility(View.VISIBLE);
 
                 View answerSideView = findViewById(R.id.flashcard_answer);
                 View questionSideView = findViewById(R.id.flashcard_question);
 
+                findViewById(R.id.flashcard_question).setCameraDistance(15000);
+                findViewById(R.id.flashcard_answer).setCameraDistance(15000);
+                questionSideView.animate()
+                        .rotationY(90)
+                        .setDuration(100)
+                        .withEndAction(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        questionSideView.setVisibility(View.INVISIBLE);
+                                        findViewById(R.id.flashcard_answer).setVisibility(View.VISIBLE);
+                                        // second quarter turn
+                                        findViewById(R.id.flashcard_answer).setRotationY(-90);
+                                        findViewById(R.id.flashcard_answer).animate()
+                                                .rotationY(0)
+                                                .setDuration(200)
+                                                .start();
+                                    }
+                                }
+                        ).start();
+
+                //**Circle answer reveal animation below**
                 // get the center for the clipping circle
-                int cx = answerSideView.getWidth() / 2;
-                int cy = answerSideView.getHeight() / 2;
-
+                //int cx = answerSideView.getWidth() / 2;
+                //int cy = answerSideView.getHeight() / 2;
                 // get the final radius for the clipping circle
-                float finalRadius = (float) Math.hypot(cx, cy);
-
+                //float finalRadius = (float) Math.hypot(cx, cy);
                 // create the animator for this view (the start radius is zero)
-                Animator anim = ViewAnimationUtils.createCircularReveal(answerSideView, cx, cy, 0f, finalRadius);
+                //Animator anim = ViewAnimationUtils.createCircularReveal(answerSideView, cx, cy, 0f, finalRadius);
 
                 // hide the question and show the answer to prepare for playing the animation!
-                questionSideView.setVisibility(View.INVISIBLE);
-                answerSideView.setVisibility(View.VISIBLE);
+                //questionSideView.setVisibility(View.INVISIBLE);
+                //answerSideView.setVisibility(View.VISIBLE);
 
-                anim.setDuration(1500);
-                anim.start();
+                //anim.setDuration(1500);
+                //anim.start();
             }
         });
 
         flashcardAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flashcardQuestion.setVisibility(View.VISIBLE);
+                //flashcardQuestion.setVisibility(View.VISIBLE);
                 flashcardAnswer.setVisibility(View.INVISIBLE);
+
+                View answerSideView = findViewById(R.id.flashcard_answer);
+                View questionSideView = findViewById(R.id.flashcard_question);
+
+                findViewById(R.id.flashcard_question).setCameraDistance(15000);
+                findViewById(R.id.flashcard_answer).setCameraDistance(15000);
+                questionSideView.animate()
+                        .rotationY(90)
+                        .setDuration(100)
+                        .withEndAction(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        answerSideView.setVisibility(View.INVISIBLE);
+                                        findViewById(R.id.flashcard_question).setVisibility(View.VISIBLE);
+                                        // second quarter turn
+                                        findViewById(R.id.flashcard_question).setRotationY(-90);
+                                        findViewById(R.id.flashcard_question).animate()
+                                                .rotationY(0)
+                                                .setDuration(200)
+                                                .start();
+                                    }
+                                }
+                        ).start();
             }
         });
 
@@ -86,6 +131,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 flashcardAnswer1.setBackgroundColor(getResources().getColor(R.color.green, null));
+                new ParticleSystem(MainActivity.this, 60, R.drawable.confetti, 3000)
+                        .setSpeedRange(0.2f, 0.5f)
+                        .oneShot(findViewById(R.id.flashcard_answer1), 100);
+                new ParticleSystem(MainActivity.this, 60, R.drawable.confetti2, 3000)
+                        .setSpeedRange(0.2f, 0.5f)
+                        .oneShot(findViewById(R.id.flashcard_answer1), 100);
+                new ParticleSystem(MainActivity.this, 60, R.drawable.confetti3, 3000)
+                        .setSpeedRange(0.2f, 0.5f)
+                        .oneShot(findViewById(R.id.flashcard_answer1), 100);
             }
         });
 
