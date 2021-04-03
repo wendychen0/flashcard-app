@@ -3,7 +3,7 @@
 ## Lab 4
 
 ### App Description
-Flashcard app with many animations to enhance the experience
+Flashcard app with many animations to enhance the user experience
 
 ### App Walk-though
 
