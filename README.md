@@ -3,11 +3,11 @@
 ## Lab 4
 
 ### App Description
-Flashcard app with many animations to enhance the user experience
+Flashcard app with many animations to enhance the user experience and a custom launcher icon
 
 ### App Walk-though
 
-<img src="https://user-images.githubusercontent.com/50306459/113469848-acd01f00-9405-11eb-89e4-60705b16b24c.gif" width=200><br>
+<img src="https://user-images.githubusercontent.com/50306459/113470030-43e9a680-9407-11eb-8034-a97ddf94bd55.gif" width=200><br>
 
 ## Required
 - [x] User sees a transition animation when going from the main screen to the add card screen.
