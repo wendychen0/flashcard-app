@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         if (allFlashcards != null && allFlashcards.size() > 0) {
             ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(0).getQuestion());
             ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(0).getAnswer());
+            ((TextView) findViewById(R.id.flashcard_answer1)).setText(allFlashcards.get(0).getAnswer());
+            ((TextView) findViewById(R.id.flashcard_answer2)).setText(allFlashcards.get(0).getWrongAnswer1());
+            ((TextView) findViewById(R.id.flashcard_answer3)).setText(allFlashcards.get(0).getWrongAnswer2());
+
         }
 
         TextView newQuestion = findViewById(R.id.questionTextField);
@@ -187,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
                 MainActivity.this.startActivityForResult(intent, 100);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+
             }
         });
 
@@ -263,6 +269,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.editButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String question = ((EditText) findViewById(R.id.questionTextField)).getText().toString();
+                String answer = ((EditText) findViewById(R.id.answerTextField)).getText().toString();
+                String answer2 = ((EditText) findViewById(R.id.answerTextField2)).getText().toString();
+                String answer3 = ((EditText) findViewById(R.id.answerTextField3)).getText().toString();
+
+                Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                intent.putExtra("question", question);
+                intent.putExtra("string2", answer);
+                intent.putExtra("string3", answer2);
+                intent.putExtra("string4", answer3);
+                MainActivity.this.startActivityForResult(intent, 100);
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -273,13 +295,18 @@ public class MainActivity extends AppCompatActivity {
             String string3 = data.getExtras().getString("string3");
             String string4 = data.getExtras().getString("string4");
             ((TextView)findViewById(R.id.flashcard_question)).setText(question);
-
             ((TextView)findViewById(R.id.flashcard_answer)).setText(string2);
+            ((TextView)findViewById(R.id.flashcard_answer1)).setText(string2);
             ((TextView)findViewById(R.id.flashcard_answer2)).setText(string3);
             ((TextView)findViewById(R.id.flashcard_answer3)).setText(string4);
 
             flashcardDatabase.insertCard(new Flashcard(question, string2, string3, string4));
             allFlashcards = flashcardDatabase.getAllCards();
+
+            Snackbar.make(findViewById(R.id.flashcard_question),
+                    "Card successfully created",
+                    Snackbar.LENGTH_SHORT)
+                    .show();
         }
     }
 }
